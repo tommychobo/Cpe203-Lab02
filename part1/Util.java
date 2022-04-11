@@ -12,7 +12,7 @@ public class Util {
         for(int i = 1; i < p.getPoints().size(); i++){
             lengthSum += pythagoras(p.getPoints().get(i), p.getPoints().get(i-1));
         }
-        lengthSum += pythagoras(p.getPoints().get(0), p.getPoints().get(p.getPoints().size()));
+        lengthSum += pythagoras(p.getPoints().get(0), p.getPoints().get(p.getPoints().size()-1));
         return lengthSum;
     }
     private static double pythagoras(Point p1, Point p2){

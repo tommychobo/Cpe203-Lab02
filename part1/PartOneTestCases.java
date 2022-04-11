@@ -1,5 +1,6 @@
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.Arrays;
@@ -83,6 +84,69 @@ public class PartOneTestCases
 
       verifyImplSpecifics(Util.class, expectedMethodNames,
          expectedMethodReturns, expectedMethodParameters);
+   }
+
+   @Test
+   public void testPerimCircle(){
+      Circle c = new Circle(new Point(5.0, 5.0), 20.0/Math.PI);
+      assertEquals(40.0, Util.perimeter(c), DELTA);
+   }
+
+   @Test
+   public void testPerimRectangle(){
+      Rectangle r = new Rectangle(new Point(0, 5), new Point(5, 0));
+      assertEquals(20.0, Util.perimeter(r), DELTA);
+   }
+
+   @Test
+   public void testPerimPolygon(){
+      ArrayList<Point> points = new ArrayList<>();
+      points.add(new Point(0, 0));
+      points.add(new Point(9, 12)); //15
+      points.add(new Point(20, 12)); //11
+      points.add(new Point(11, 0)); //15
+      Polygon p = new Polygon(points);
+      assertEquals(52.0, Util.perimeter(p), DELTA);
+   }
+
+   @Test
+   public void testPerimCircle2(){
+      Circle c = new Circle(new Point(1, 1), 2);
+      assertEquals(12.5663706, Util.perimeter(c), DELTA);
+   }
+
+   @Test
+   public void testPerimRectangle2(){
+      Rectangle r = new Rectangle(new Point(-1.0, 2.0), new Point(1.0, -1.6));
+      assertEquals(11.2, Util.perimeter(r), DELTA);
+   }
+
+   @Test
+   public void testPerimPolygon2(){
+      Polygon p = new Polygon(new ArrayList<>(Arrays.asList(
+              new Point(0, 0),
+              new Point(3, 1),
+              new Point(1, 4),
+              new Point(-1, 4)
+      )));
+      assertEquals(12.8909345, Util.perimeter(p), DELTA);
+   }
+
+   @Test
+   public void testBigger(){
+      Circle c = new Circle(new Point(1.0, 1.0), 2.0);
+      Rectangle r = new Rectangle(new Point(-1.0, 2.0), new Point(1.0, -1.6));
+      Polygon p = new Polygon(new ArrayList<>(Arrays.asList(
+              new Point(0, 0),
+              new Point(3, 1),
+              new Point(1, 4),
+              new Point(-1, 4)
+      )));
+      /*System.out.println("Circle: "+Util.perimeter(c)
+              +"\nRectangle: "+Util.perimeter(r)
+              +"\nPolygon: "+Util.perimeter(p)
+              +"\nBiggest: "+Bigger.whichIsBigger(c, r, p));*/
+      assertEquals(12.8909345, Bigger.whichIsBigger(c, r, p), DELTA);
    }
 
    private static void verifyImplSpecifics(
